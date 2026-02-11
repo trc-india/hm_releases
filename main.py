@@ -256,8 +256,11 @@ def init_camera_like_main():
     config["sensor"]["output_size"] = (CAM_WIDTH, CAM_HEIGHT)
     picam2.configure(config)
     picam2.start()
-    picam2.set_controls({"ScalerCrop": (0, 0, 3280, 2464)})
-    time.sleep(0.5)
+        # Zoom to ~90 degrees (approx 75% of full sensor)
+        # Full: 3280x2464
+        # Crop: 2460x1848 (Offset x=410, y=308)
+        picam2.set_controls({"ScalerCrop": (410, 308, 2460, 1848)})
+        time.sleep(0.5)
     return picam2
 
 

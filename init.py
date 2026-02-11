@@ -365,8 +365,9 @@ def camera_worker():
         config["sensor"]["output_size"] = (CAM_WIDTH, CAM_HEIGHT)
         picam2.configure(config)
         picam2.start()
-        picam2.set_controls({"ScalerCrop": (0, 0, 3280, 2464)})
-        time.sleep(0.5)
+    # Zoom to ~90 degrees (approx 75% of full sensor)
+    picam2.set_controls({"ScalerCrop": (410, 308, 2460, 1848)})
+    time.sleep(0.5)
     except Exception as e:
         logging.critical(f"[CAMERA] ✗ Hardware Error: {e}")
         return
